@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const readline = require('readline');
 const Prompt = require("./prompt");
 const Message = require("./messages");
-const { ENGINE_METHOD_ALL } = require('constants');
+const Engine = require("./engine");
 
 var message = new Message();
 
@@ -19,6 +19,10 @@ rl.on("close", () => {
     process.exit(0);
 });
 
+/**
+ * @name showPrompt
+ * @description function prompting the question to use and asking for an input
+ */
 function showPrompt() {
     rl.question(message.promptMessage, line => {
         if (line !== "") {
@@ -26,7 +30,9 @@ function showPrompt() {
             if (!result.valid) {
                 console.log(chalk.red(result.message));
             } else {
-                console.log(result);
+                var moves = new Engine(result).getPossibleMoves();
+                console.log(moves);
+                print(moves);
             }
             rl.close();
         } else {
@@ -35,6 +41,31 @@ function showPrompt() {
     });
 }
 
+/**
+ * @name print
+ * @description function displaying the introduction and game rules
+ * @param {array} possible moves for a piece
+ */
+function print(moves) {
+    let rowNames = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+    for (let row = 8; row > 0; row--) {
+        console.log("\n");
+        for (let col = 0; col < 8; col++) {
+            let colPos = 8 - (col + 1),
+                cell = rowNames[colPos] + row;
+            if (moves.indexOf(cell) > -1) {
+                process.stdout.write(chalk.blue.bold(cell + " "));
+            } else {
+                process.stdout.write(cell + " ");
+            }
+        }
+    }
+}
+
+/**
+ * @name showIntroduction
+ * @description function displaying the introduction and game rules
+ */
 function showIntroduction() {
     console.log(chalk.blue.underline.bold(message.title));
     console.log(chalk.green(message.introduction));

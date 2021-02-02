@@ -1,4 +1,5 @@
 const Message = require("./messages");
+const Cell = require("./cell");
 
 module.exports = class Prompt {
     constructor(input) {
@@ -34,8 +35,8 @@ module.exports = class Prompt {
             }
             if (validName && validPosition) {
                 this.result.valid = true;
-                this.result.piece = validName;
-                this.result.position = validPosition;
+                this.result.piece = splitter[0];
+                this.result.position = splitter[1];
             }
         }
         return this.result;
@@ -64,9 +65,9 @@ module.exports = class Prompt {
      */
     verifyPosition(position) {
         let valid = false;
-        let splitter = position.split("");
-        var charCode = splitter[0].charCodeAt(0);
-        if (charCode >= 97 && charCode <= 104 && splitter[1] >= 1 && splitter[1] <= 8) {
+        var cell = new Cell(position).getCell();
+        var charCode = cell.row.charCodeAt(0);
+        if (charCode >= 97 && charCode <= 104 && cell.col >= 1 && cell.col <= 8) {
             valid = true;
         }
         return valid;
