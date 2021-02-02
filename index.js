@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const readline = require('readline');
 const Prompt = require("./prompt");
 const Message = require("./messages");
+const { ENGINE_METHOD_ALL } = require('constants');
 
 var message = new Message();
 
@@ -11,7 +12,6 @@ const rl = readline.createInterface({
 });
 
 showIntroduction();
-
 showPrompt();
 
 rl.on("close", () => {
@@ -25,8 +25,10 @@ function showPrompt() {
             var result = new Prompt(line).verifyInputs();
             if (!result.valid) {
                 console.log(chalk.red(result.message));
-                rl.close();
+            } else {
+                console.log(result);
             }
+            rl.close();
         } else {
             showPrompt();
         }
