@@ -1,4 +1,4 @@
-const Cell = require("./cell");
+const Cell = require("../cell");
 
 module.exports = class Rook {
     constructor(position) {
