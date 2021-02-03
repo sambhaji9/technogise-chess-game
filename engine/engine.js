@@ -1,4 +1,5 @@
 const Rook = require("./rook");
+const Bishop = require("./bishop");
 
 module.exports = class Engine {
     constructor(input) {
@@ -26,7 +27,7 @@ module.exports = class Engine {
 
                 break;
             case "bishop":
-
+                moves = new Bishop(this.input.position).getNextMoves();
                 break;
             case "pawn":
 
