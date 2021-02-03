@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const readline = require('readline');
 const Prompt = require("./prompt");
 const Message = require("./messages");
-const Engine = require("./engine");
+const Engine = require("./engine/engine");
 
 var message = new Message();
 
