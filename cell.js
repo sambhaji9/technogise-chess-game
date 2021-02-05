@@ -5,6 +5,8 @@ module.exports = class Cell {
             row: 0,
             col: 0
         };
+        
+        this.row = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     }
 
     /**
@@ -18,5 +20,10 @@ module.exports = class Cell {
         this.cell.col = splitter[1];
 
         return this.cell;
+    }
+
+    getRowIndex() {
+        var cell = this.getCell();
+        return this.row.indexOf(cell.row.toUpperCase());
     }
 };
