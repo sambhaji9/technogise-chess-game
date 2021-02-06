@@ -49,7 +49,7 @@ module.exports = class Prompt {
      * @returns {boolean} true or false
      */
     verifyPiece(pieceName) {
-        let pieceNames = ["king", "queen", "bishop", "horse", "rook", "pawn"],
+        let pieceNames = ["king", "queen", "bishop", "knight", "rook", "pawn"],
             valid = false;
         if (pieceNames.indexOf(pieceName.toLowerCase()) > -1) {
             valid = true;
