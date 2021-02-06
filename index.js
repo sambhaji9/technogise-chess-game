@@ -49,7 +49,7 @@ function showPrompt() {
 function print(moves, result) {
     let rowNames = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
 
-    process.stdout.write("\nLayout for ".concat(result.piece).concat(" at ").concat(result.position));
+    process.stdout.write("\nLayout for ".concat(result.piece.toUpperCase().concat(" at ").concat(result.position.toUpperCase())));
 
     for (let row = 8; row > 0; row--) {
         console.log("\n");
