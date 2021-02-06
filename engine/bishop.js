@@ -6,6 +6,12 @@ module.exports = class Bishop {
         this.cell = new Cell(this.position);
         
         this.col = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        this.DIRECTION = {
+            TOP_LEFT: "topLeft",
+            TOP_RIGHT: "topRight",
+            BOTTOM_LEFT: "bottomLeft",
+            BOTTOM_RIGHT: "bottomRight"
+        };
     }
 
     /**
@@ -31,16 +37,11 @@ module.exports = class Bishop {
      * @param {array} 
      */
     getTopLeftMoves(moves) {
-        var col = this.cell.getColIndex(),
-            row = this.cell.getRowIndex(),
-            possibleMoves = Math.min(row + 1, col + 1) - 1,
-            startIndex = col - 1,
-            cell = this.cell.getCell();
-
+        var topLeft = this.getMovesAndIndex(this.DIRECTION.TOP_LEFT);
         
-        for (let index = 0; index < possibleMoves; index++) {
-            const element = this.col[startIndex - index];
-            moves.push(element + (parseInt(cell.row) + (index + 1)));
+        for (let index = 0; index < topLeft.possibleMoves; index++) {
+            const element = this.col[topLeft.startIndex - index];
+            moves.push(element + (parseInt(topLeft.cell.row) + (index + 1)));
         }
 
         return moves;
@@ -53,16 +54,11 @@ module.exports = class Bishop {
      * @param {array} 
      */
     getTopRightMoves(moves) {
-        var col = this.cell.getColIndex(),
-            row = this.cell.getRowIndex(),
-            possibleMoves = Math.min(row + 1, 9 - (col + 1)) - 1,
-            startIndex = col + 1,
-            cell = this.cell.getCell();
+        var topRight = this.getMovesAndIndex(this.DIRECTION.TOP_RIGHT);
 
-        
-        for (let index = 0; index < possibleMoves; index++) {
-            const element = this.col[startIndex + index];
-            moves.push(element + (parseInt(cell.row) + (index + 1)));
+        for (let index = 0; index < topRight.possibleMoves; index++) {
+            const element = this.col[topRight.startIndex + index];
+            moves.push(element + (parseInt(topRight.cell.row) + (index + 1)));
         }
 
         return moves;
@@ -75,16 +71,11 @@ module.exports = class Bishop {
      * @param {array} 
      */
     getBottomLeftMoves(moves) {
-        var col = this.cell.getColIndex(),
-            row = this.cell.getRowIndex(),
-            possibleMoves = 8 - Math.max(row + 1, 9 - (col + 1)),
-            startIndex = col - 1,
-            cell = this.cell.getCell();
-
+        var bottomLeft = this.getMovesAndIndex(this.DIRECTION.BOTTOM_LEFT);
         
-        for (let index = 0; index < possibleMoves; index++) {
-            const element = this.col[startIndex - index];
-            moves.push(element + (parseInt(cell.row) - (index + 1)));
+        for (let index = 0; index < bottomLeft.possibleMoves; index++) {
+            const element = this.col[bottomLeft.startIndex - index];
+            moves.push(element + (parseInt(bottomLeft.cell.row) - (index + 1)));
         }
 
         return moves;
@@ -97,18 +88,47 @@ module.exports = class Bishop {
      * @param {array} 
      */
     getBottomRightMoves(moves) {
-        var col = this.cell.getColIndex(),
-            row = this.cell.getRowIndex(),
-            possibleMoves = 8 - Math.max(row + 1, col + 1),
-            startIndex = col + 1,
-            cell = this.cell.getCell();
-
-        
-        for (let index = 0; index < possibleMoves; index++) {
-            const element = this.col[startIndex + index];
-            moves.push(element + (parseInt(cell.row) - (index + 1)));
+        var bottomRight = this.getMovesAndIndex(this.DIRECTION.BOTTOM_RIGHT);
+   
+        for (let index = 0; index < bottomRight.possibleMoves; index++) {
+            const element = this.col[bottomRight.startIndex + index];
+            moves.push(element + (parseInt(bottomRight.cell.row) - (index + 1)));
         }
 
         return moves;
+    }
+
+    getMovesAndIndex(direction) {
+        var possibleMoves = 0,
+            startIndex = 0,
+            col = this.cell.getColIndex(),
+            row = this.cell.getRowIndex();
+
+        switch (direction) {
+            case this.DIRECTION.TOP_LEFT:
+                possibleMoves = Math.min(row + 1, col + 1) - 1;
+                startIndex = col - 1;
+                break;
+            case this.DIRECTION.TOP_RIGHT:
+                possibleMoves = Math.min(row + 1, 9 - (col + 1)) - 1;
+                startIndex = col + 1;
+                break;
+            case this.DIRECTION.BOTTOM_LEFT:
+                possibleMoves = 8 - Math.max(row + 1, 9 - (col + 1));
+                startIndex = col - 1;
+                break;
+            case this.DIRECTION.BOTTOM_RIGHT:
+                possibleMoves = 8 - Math.max(row + 1, col + 1);
+                startIndex = col + 1;
+                break;
+        }
+
+        return {
+            col: col,
+            row: row,
+            possibleMoves: possibleMoves,
+            startIndex: startIndex,
+            cell: this.cell.getCell()
+        };
     }
 };
