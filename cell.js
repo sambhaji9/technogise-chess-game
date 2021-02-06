@@ -6,7 +6,7 @@ module.exports = class Cell {
             col: 0
         };
         
-        this.row = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        this.col = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     }
 
     /**
@@ -16,14 +16,31 @@ module.exports = class Cell {
      */
     getCell() {
         var splitter = this.position.split("");
-        this.cell.row = splitter[0];
-        this.cell.col = splitter[1];
+        this.cell.row = splitter[1];
+        this.cell.col = splitter[0];
 
         return this.cell;
     }
 
+    /**
+     * @name getRowIndex
+     * @description function returning the row index
+     * @returns {number} Index of the row
+     */
     getRowIndex() {
         var cell = this.getCell();
-        return this.row.indexOf(cell.row.toUpperCase());
+        return (8 - parseInt(cell.row));
+    }
+
+    /**
+     * @name getColIndex
+     * @description function returning the col index
+     * @returns {number} Index of the col
+     */
+    getColIndex() {
+        var cell = this.getCell();
+        var col = this.col.indexOf(cell.col.toUpperCase());
+
+        return col;
     }
 };

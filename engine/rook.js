@@ -12,14 +12,14 @@ module.exports = class Rook {
      * @returns {array} array containing next moves
      */
     getNextMoves() {
-        var row = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        var col = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         var moves = [];
         for (let index = 0; index < 8; index++) {
-            moves.push((this.cell.row.toUpperCase() + (index + 1)));
+            moves.push((this.cell.col.toUpperCase() + (index + 1)));
         }
 
         for (let index = 0; index < 8; index++) {
-            moves.push(row[index] + this.cell.col);
+            moves.push(col[index] + this.cell.row);
         }
         return moves;
     }
