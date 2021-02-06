@@ -1,5 +1,6 @@
 const Rook = require("./rook");
 const Bishop = require("./bishop");
+const King = require("./king");
 
 module.exports = class Engine {
     constructor(input) {
@@ -18,7 +19,7 @@ module.exports = class Engine {
                 moves = new Rook(this.input.position).getNextMoves();
                 break;
             case "king":
-
+                moves = new King(this.input.position).getNextMoves();
                 break;
             case "queen":
 

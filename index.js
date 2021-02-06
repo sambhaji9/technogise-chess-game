@@ -32,7 +32,7 @@ function showPrompt() {
             } else {
                 var moves = new Engine(result).getPossibleMoves();
                 console.log(moves);
-                print(moves);
+                print(moves, result);
             }
             rl.close();
         } else {
@@ -46,17 +46,20 @@ function showPrompt() {
  * @description function displaying the introduction and game rules
  * @param {array} possible moves for a piece
  */
-function print(moves) {
+function print(moves, result) {
     let rowNames = ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
+
+    process.stdout.write("\nLayout for ".concat(result.piece).concat(" at ").concat(result.position));
+
     for (let row = 8; row > 0; row--) {
         console.log("\n");
         for (let col = 0; col < 8; col++) {
             let colPos = 8 - (col + 1),
                 cell = rowNames[colPos] + row;
             if (moves.indexOf(cell) > -1) {
-                process.stdout.write(chalk.blue.bold(cell + " "));
+                process.stdout.write(" " + chalk.blue.bold(cell + " "));
             } else {
-                process.stdout.write(cell + " ");
+                process.stdout.write(" " + cell + " ");
             }
         }
     }

@@ -66,8 +66,8 @@ module.exports = class Prompt {
     verifyPosition(position) {
         let valid = false;
         var cell = new Cell(position).getCell();
-        var charCode = cell.row.charCodeAt(0);
-        if (charCode >= 97 && charCode <= 104 && cell.col >= 1 && cell.col <= 8) {
+        var charCode = cell.col.charCodeAt(0);
+        if (charCode >= 97 && charCode <= 104 && cell.row >= 1 && cell.row <= 8) {
             valid = true;
         }
         return valid;
