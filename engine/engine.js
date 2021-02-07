@@ -35,9 +35,6 @@ module.exports = class Engine {
             case "pawn":
                 moves = new Pawn(this.input.position).getNextMoves();
                 break;
-
-            default:
-                break;
         }
         return moves;
     }
