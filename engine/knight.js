@@ -17,22 +17,11 @@ module.exports = class Knight {
             cell = this.cell.getCell();
 
         moves.push(this.position.toUpperCase());
+        moves = this.getLeftMoves(moves, col, cell);
+        moves = this.getRightMoves(moves, col, cell);
+        moves = this.getLeftTopBottomMoves(moves, col, cell);
+        moves = this.getRightTopBottomMoves(moves, col, cell);
 
-        if (col > 1) {
-            moves = this.getLeftMoves(moves, col, cell);
-        }
-
-        if (col < 6) {
-            moves = this.getRightMoves(moves, col, cell);
-        }
-
-        if (col > 0) {
-            moves = this.getLeftTopBottomMoves(moves, col, cell);
-        }
-
-        if (col < 7) {
-            moves = this.getRightTopBottomMoves(moves, col, cell);
-        }
         return moves;
     }
 
@@ -45,17 +34,20 @@ module.exports = class Knight {
      * @returns {array} next moves
      */
     getLeftMoves(moves, col, cell) {
-        const element = this.cell.col[col - 2];
+        if (col > 1) {
+            const element = this.cell.col[col - 2];
 
-        var leftIndex = parseInt(cell.row) + 1;
-        if (leftIndex <= 8) {
-            moves.push(element + leftIndex);
+            var leftIndex = parseInt(cell.row) + 1;
+            if (leftIndex <= 8) {
+                moves.push(element + leftIndex);
+            }
+
+            var bottomIndex = parseInt(cell.row) - 1;
+            if (bottomIndex > 0) {
+                moves.push(element + bottomIndex);
+            }
         }
 
-        var bottomIndex = parseInt(cell.row) - 1;
-        if (bottomIndex > 0) {
-            moves.push(element + bottomIndex);
-        }
         return moves;
     }
 
@@ -68,16 +60,18 @@ module.exports = class Knight {
      * @returns {array} next moves
      */
     getRightMoves(moves, col, cell) {
-        const element = this.cell.col[col + 2];
+        if (col < 6) {
+            const element = this.cell.col[col + 2];
 
-        var topIndex = parseInt(cell.row) + 1;
-        if (topIndex <= 8) {
-            moves.push(element + topIndex);
-        }
+            var topIndex = parseInt(cell.row) + 1;
+            if (topIndex <= 8) {
+                moves.push(element + topIndex);
+            }
 
-        var bottomIndex = parseInt(cell.row) - 1;
-        if (bottomIndex > 0) {
-            moves.push(element + bottomIndex);
+            var bottomIndex = parseInt(cell.row) - 1;
+            if (bottomIndex > 0) {
+                moves.push(element + bottomIndex);
+            }
         }
         return moves;
     }
@@ -91,16 +85,18 @@ module.exports = class Knight {
      * @returns {array} next moves
      */
     getLeftTopBottomMoves(moves, col, cell) {
-        const element = this.cell.col[col - 1];
+        if (col > 0) {
+            const element = this.cell.col[col - 1];
 
-        var topIndex = parseInt(cell.row) + 2;
-        if (topIndex <= 8) {
-            moves.push(element + topIndex);
-        }
+            var topIndex = parseInt(cell.row) + 2;
+            if (topIndex <= 8) {
+                moves.push(element + topIndex);
+            }
 
-        var bottomIndex = parseInt(cell.row) - 2;
-        if (bottomIndex > 0) {
-            moves.push(element + bottomIndex);
+            var bottomIndex = parseInt(cell.row) - 2;
+            if (bottomIndex > 0) {
+                moves.push(element + bottomIndex);
+            }
         }
         return moves;
     }
@@ -114,16 +110,18 @@ module.exports = class Knight {
      * @returns {array} next moves
      */
     getRightTopBottomMoves(moves, col, cell) {
-        const element = this.cell.col[col + 1];
+        if (col < 7) {
+            const element = this.cell.col[col + 1];
 
-        var topIndex = parseInt(cell.row) + 2;
-        if (topIndex <= 8) {
-            moves.push(element + topIndex);
-        }
+            var topIndex = parseInt(cell.row) + 2;
+            if (topIndex <= 8) {
+                moves.push(element + topIndex);
+            }
 
-        var bottomIndex = parseInt(cell.row) - 2;
-        if (bottomIndex > 0) {
-            moves.push(element + bottomIndex);
+            var bottomIndex = parseInt(cell.row) - 2;
+            if (bottomIndex > 0) {
+                moves.push(element + bottomIndex);
+            }
         }
         return moves;
     }
