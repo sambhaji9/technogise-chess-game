@@ -2,6 +2,7 @@ const Rook = require("./rook");
 const Bishop = require("./bishop");
 const King = require("./king");
 const Knight = require("./knight");
+const Pawn = require("./pawn");
 
 module.exports = class Engine {
     constructor(input) {
@@ -32,7 +33,7 @@ module.exports = class Engine {
                 moves = new Bishop(this.input.position).getNextMoves();
                 break;
             case "pawn":
-
+                moves = new Pawn(this.input.position).getNextMoves();
                 break;
 
             default:
