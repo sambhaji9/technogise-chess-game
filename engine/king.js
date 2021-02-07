@@ -3,41 +3,88 @@ const Cell = require("../cell");
 module.exports = class King {
     constructor(position) {
         this.position = position;
-        this.cell = new Cell(this.position).getCell();
+        this.cell = new Cell(this.position);
     }
 
+    /**
+     * @name getNextMoves
+     * @description function predicting the next available moves for a King
+     * @returns {array} next moves
+     */
     getNextMoves() {
-        var colIndex = 8 - this.cell.col,
-            moves = [],
-            previousRow,
-            nextRow;
+        var moves = [];
 
-        if (rowIndex - 1 >= 0 && colIndex >= 0) {
-            previousRow = this.row[rowIndex - 1];
-            for (let previousIndex = (colIndex - 1); previousIndex < (colIndex + 3); previousIndex++) {
-                if (colIndex > 0 && colIndex < 8) {
-                    moves.push(previousRow.concat(previousIndex));
-                }
-            }
-        }
-
-        // if (rowIndex + 1 < 8) {
-        //     nextRow = this.row[rowIndex + 1];
-        // }
-
-
-
-
-
-        // for (let nextIndex = rowIndex; nextIndex < (rowIndex + 3); nextIndex++) {
-        //     moves.push(nextRow.concat(nextIndex + 1));
-        // }
-
-        // for (let index = rowIndex; index < (rowIndex + 3); index++) {
-        //     moves.push(this.cell.row.toUpperCase().concat(index + 1));
-        // }
+        moves.push(this.position.toUpperCase());
+        moves = this.getTopMoves(moves);
+        moves = this.getBottomMoves(moves);
+        moves = this.getSideMoves(moves);
 
         return moves;
     }
 
+    /**
+     * @name getTopMoves
+     * @description function predicting the next available moves for a King
+     * @param {array} previous moves
+     * @returns {array} next moves
+     */
+    getTopMoves(moves) {
+        var cell = this.cell.getCell(),
+            colIndex = this.cell.getColIndex(),
+            startIndex = colIndex - 1;
+
+        for (let index = 0; index < 3; index++) {
+            const element = this.cell.col[startIndex + index];
+            var rowIndex = parseInt(cell.row) + 1;
+            if (typeof element !== "undefined" && rowIndex <= 8 && rowIndex > 0) {
+                moves.push(element + rowIndex);
+            }
+        }
+
+        return moves;
+    }
+
+    /**
+     * @name getBottomMoves
+     * @description function predicting the next available moves for a King
+     * @param {array} previous moves
+     * @returns {array} next moves
+     */
+    getBottomMoves(moves) {
+        var cell = this.cell.getCell(),
+            colIndex = this.cell.getColIndex(),
+            startIndex = colIndex - 1;
+
+        for (let index = 0; index < 3; index++) {
+            const element = this.cell.col[startIndex + index];
+            var rowIndex = parseInt(cell.row) - 1;
+            if (typeof element !== "undefined" && rowIndex <= 8 && rowIndex > 0) {
+                moves.push(element + rowIndex);
+            }
+        }
+
+        return moves;
+    }
+
+    /**
+     * @name getSideMoves
+     * @description function predicting the next available moves for a King
+     * @param {array} previous moves
+     * @returns {array} next moves
+     */
+    getSideMoves(moves) {
+        var cell = this.cell.getCell(),
+            colIndex = this.cell.getColIndex(),
+            startIndex = colIndex - 1;
+
+        for (let index = 0; index < 3; index++) {
+            const element = this.cell.col[startIndex + index];
+            var rowIndex = parseInt(cell.row);
+            if (typeof element !== "undefined" && rowIndex <= 8 && rowIndex > 0) {
+                moves.push(element + rowIndex);
+            }
+        }
+
+        return moves;
+    }
 };

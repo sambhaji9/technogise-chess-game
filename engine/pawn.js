@@ -23,7 +23,7 @@ module.exports = class Pawn {
 
     /**
      * @name getTopMoves
-     * @description function predicting the next available moves for a Knight
+     * @description function predicting the next available moves for a Pawn
      * @param {array} previous moves
      * @returns {array} next moves
      */
@@ -45,7 +45,7 @@ module.exports = class Pawn {
 
     /**
      * @name getBottomMoves
-     * @description function predicting the next available moves for a Knight
+     * @description function predicting the next available moves for a Pawn
      * @param {array} previous moves
      * @returns {array} next moves
      */
