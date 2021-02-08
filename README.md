@@ -8,7 +8,7 @@ To install packages, run command **npm install**
 
 To run the program, run command **node index.js**
 
-To run the test, run command **npm test**
+To run the tests, run command **npm test**
 
 ## Packges information ##
 Following packages are installed
@@ -26,4 +26,9 @@ Following packages are installed
 
 <p>
     <img src="https://github.com/sambhaji9/technogise-chess-game/blob/master/screenshots/2.png"/>
+</p>
+
+<p>
+    Test Coverage<br/>
+    <img src="https://github.com/sambhaji9/technogise-chess-game/blob/master/screenshots/3.png"/>
 </p>
