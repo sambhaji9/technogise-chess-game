@@ -67,7 +67,7 @@ module.exports = class Prompt {
         let valid = false;
         var cell = new Cell(position).getCell();
         var charCode = cell.col.charCodeAt(0);
-        if (charCode >= 97 && charCode <= 104 && cell.row >= 1 && cell.row <= 8) {
+        if (((charCode >= 97 && charCode <= 104) || (charCode >= 65 && charCode <= 72)) && cell.row >= 1 && cell.row <= 8) {
             valid = true;
         }
         return valid;

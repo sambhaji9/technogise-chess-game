@@ -3,6 +3,7 @@ const Bishop = require("./bishop");
 const King = require("./king");
 const Knight = require("./knight");
 const Pawn = require("./pawn");
+const Queen = require("./queen");
 
 module.exports = class Engine {
     constructor(input) {
@@ -16,7 +17,7 @@ module.exports = class Engine {
      */
     getPossibleMoves() {
         var moves;
-        switch (this.input.piece) {
+        switch (this.input.piece.toLowerCase()) {
             case "rook":
                 moves = new Rook(this.input.position).getNextMoves();
                 break;
@@ -24,7 +25,7 @@ module.exports = class Engine {
                 moves = new King(this.input.position).getNextMoves();
                 break;
             case "queen":
-
+                moves = new Queen(this.input.position).getNextMoves();
                 break;
             case "knight":
                 moves = new Knight(this.input.position).getNextMoves();
