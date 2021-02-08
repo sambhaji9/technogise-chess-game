@@ -4,6 +4,12 @@ NodeJS version 10 and above
 ## Instruction ##
 To install packages, run command **npm install**
 
+## How to run the program ##
+
+To run the program, run command **node index.js**
+
+To run the test, run command **npm test**
+
 ## Packges information ##
 Following packages are installed
 
@@ -12,8 +18,12 @@ Following packages are installed
 3. **Chai**: TDD assertion library for Node.js
 4. **nyc**: CLI to show the tests coverage reports for each class
 
-## How to run the program ##
+## Screenshots ##
+<p>
+    <img src="https://github.com/sambhaji9/technogise-chess-game/blob/master/screenshots/1.png"/>
+</p>
 
-To run the program, run command **node index.js**
 
-To run the test, run command **npm test**
+<p>
+    <img src="https://github.com/sambhaji9/technogise-chess-game/blob/master/screenshots/2.png"/>
+</p>
